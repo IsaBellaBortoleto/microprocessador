@@ -53,11 +53,12 @@ BEGIN
         flag_v => flag_v
     );
 
-    -- 4. Processo que gera os estímulos (Simulação)
+    -- 4. Simulação
     PROCESS
     BEGIN
         ------------------------------------------------------------------
         -- TESTE 1: Soma Normal ("000")
+        -- 5 + 3 = 8
         -- Esperado: out_result = 8, Z=0, C=0, V=0
         ------------------------------------------------------------------
         in_seletor <= "00";
@@ -67,6 +68,7 @@ BEGIN
 
         ------------------------------------------------------------------
         -- TESTE 2: Testando o BHI (Subtração onde A > B)
+        -- 5 - 3 = 2
         -- Esperado: out_result = 2, Z=0, C=1 (Sem empréstimo, logo BHI pularia)
         ------------------------------------------------------------------
         in_seletor <= "01"; -- Operação de Subtração
@@ -76,7 +78,8 @@ BEGIN
 
         ------------------------------------------------------------------
         -- TESTE 3: Testando a Flag Carry/Borrow (Subtração onde A < B)
-        -- Esperado: Flag C = '0' (Houve empréstimo, BHI NÃO pularia)
+        -- 3 - 5 = -2 
+        -- Esperado: out_result = x"FFFE", Z=0, C=0, V=0 (Houve empréstimo, BHI NÃO pularia)
         ------------------------------------------------------------------
         in_seletor <= "01";
         in_a <= x"0003";
@@ -85,7 +88,8 @@ BEGIN
 
         ------------------------------------------------------------------
         -- TESTE 4: Testando a Flag Zero (Z)
-        -- Esperado: Flag Z = '1' e Flag C = '1'
+        -- 10 - 10 = 0
+        -- Esperado: out_result = x"0000", Z=1, C=1, V=0
         ------------------------------------------------------------------
         in_seletor <= "01";
         in_a <= x"000A"; -- 10
