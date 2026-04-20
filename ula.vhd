@@ -50,7 +50,8 @@ BEGIN
     -- 1. Operacoes de soma, subtracao, AND e ...
     res_soma <= ('0' & in_a) + ('0' & in_b);
     res_subt <= ('0' & in_a) + ('0' & not_b) + 1;
-    res_and <= in_a AND in_b;
+    res_and <= in_a AND in_b;  
+    -- 4 operacao
 
     -- 2. O MUX escolhe qual resultado vai para a saída final
     resultado_final <=
@@ -59,16 +60,20 @@ BEGIN
         res_and WHEN in_seletor = "10" ELSE
         --(in_a xor in_b)        when in_seletor = "011" else
         "0000000000000000"; -- Valor padrão se der pau
-    --flag carry
-    flag_c <= res_soma(16) WHEN in_seletor = "00" ELSE
-        res_subt(16) WHEN in_seletor = "01" ELSE
-        '0'; -- Para outras operações, o Carry não é relevante
-
     -- 3. Joga o resultado escolhido no pino de saída
     out_result <= resultado_final;
 
     -- 4. Cálculo das Flags combinacionais (Sem IF!)
+    --Flag zero (BHI)
     flag_z <= '1' WHEN resultado_final = "0000000000000000" ELSE
         '0';
+
+    --Flag carry
+    flag_c <= res_soma(16) WHEN in_seletor = "00" ELSE
+        res_subt(16) WHEN in_seletor = "01" ELSE
+        '0'; -- Para outras operações, o Carry não é relevante
+
+
     --Flag de overflow (BVS)
+
 END ARCHITECTURE;
