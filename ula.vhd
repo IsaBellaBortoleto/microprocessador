@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 -- Projeto: [Microprocessador]
 -- Descrição: Modelo de um Microprocessador (ULA)
--- Autor: 
+-- Autores: 
 -- Isabela Bella Bortoleto
 -- Nícolas Auersvalt Marques
 --------------------------------------------------------------------------------
@@ -10,40 +10,40 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL; 
 
-entity ULA is
+entity ula is
     Port (
         -- Duas entradas de dados de 16 bits
-        A       : in  std_logic_vector(15 downto 0);
-        B       : in  std_logic_vector(15 downto 0);
+        in_a       : in  std_logic_vector(15 downto 0);
+        in_b       : in  std_logic_vector(15 downto 0);
         
         -- Entradas para seleção da operação (Ex: 3 bits permitem até 8 operações)
-        Seletor : in  std_logic_vector(2 downto 0);
+        in_seletor : in  std_logic_vector(2 downto 0);
         
         -- Uma saída de resultado de 16 bits
-        Result  : out std_logic_vector(15 downto 0);
+        out_result  : out std_logic_vector(15 downto 0);
         
         -- Duas ou mais saídas de sinalização de 1 bit (Flags)
         -- (Substitua pelos nomes das flags do seu sorteio, ex: Zero, Carry, Overflow)
-        Flag_1  : out std_logic;
-        Flag_2  : out std_logic
+        flag_1  : out std_logic;
+        flag_2  : out std_logic
     );
 end ULA;
 
-architecture Combinacional of ULA is
+architecture a_ula of ula is
     -- Sinal interno para guardar o resultado temporariamente (útil para calcular as flags)
     signal res_interno : std_logic_vector(15 downto 0);
     
 begin
     -- Processo combinacional: a lista de sensibilidade tem as entradas
-    process(A, B, Seletor)
+    process(in_a, in_b, in_seletor)
     begin
         -- Valores padrão para evitar a criação de "Latches" indesejados
         res_interno <= (others => '0');
-        Flag_1 <= '0';
-        Flag_2 <= '0';
+        flag_1 <= '0';
+        flag_2 <= '0';
         
         -- Estrutura de decisão para a operação baseada no Seletor
-        case Seletor is
+        case in_seletor is
             when "000" =>
                 -- Exemplo: Implemente a Operação 1 aqui
                 -- res_interno <= std_logic_vector(signed(A) + signed(B));
