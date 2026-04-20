@@ -17,7 +17,7 @@ ENTITY ula IS
         in_b : IN unsigned(15 DOWNTO 0);
 
         -- Entradas para seleção da operação (Ex: 3 bits permitem até 8 operações)
-        in_seletor : IN unsigned(2 DOWNTO 0);
+        in_seletor : IN unsigned(1 DOWNTO 0);
 
         -- Uma saída de resultado de 16 bits
         out_result : OUT unsigned(15 DOWNTO 0);
@@ -54,14 +54,14 @@ BEGIN
 
     -- 2. O MUX escolhe qual resultado vai para a saída final
     resultado_final <=
-        res_soma(15 DOWNTO 0) WHEN in_seletor = "000" ELSE
-        res_subt(15 DOWNTO 0) WHEN in_seletor = "001" ELSE
-        res_and WHEN in_seletor = "010" ELSE
+        res_soma(15 DOWNTO 0) WHEN in_seletor = "00" ELSE
+        res_subt(15 DOWNTO 0) WHEN in_seletor = "01" ELSE
+        res_and WHEN in_seletor = "10" ELSE
         --(in_a xor in_b)        when in_seletor = "011" else
         "0000000000000000"; -- Valor padrão se der pau
     --flag carry
-    flag_c <= res_soma(16) WHEN in_seletor = "000" ELSE
-        res_subt(16) WHEN in_seletor = "001" ELSE
+    flag_c <= res_soma(16) WHEN in_seletor = "00" ELSE
+        res_subt(16) WHEN in_seletor = "01" ELSE
         '0'; -- Para outras operações, o Carry não é relevante
 
     -- 3. Joga o resultado escolhido no pino de saída

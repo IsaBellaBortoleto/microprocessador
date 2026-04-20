@@ -20,7 +20,7 @@ ARCHITECTURE a_ula_tb OF ula_tb IS
         PORT (
             in_a : IN unsigned(15 DOWNTO 0);
             in_b : IN unsigned(15 DOWNTO 0);
-            in_seletor : IN unsigned(2 DOWNTO 0);
+            in_seletor : IN unsigned(1 DOWNTO 0);
 
             out_result : OUT unsigned(15 DOWNTO 0);
             flag_z : OUT STD_LOGIC;
@@ -33,7 +33,7 @@ ARCHITECTURE a_ula_tb OF ula_tb IS
     -- Inicializamos com zeros para não dar aquele aviso de "Metavalue" (sinal 'U') no instante zero
     SIGNAL in_a : unsigned(15 DOWNTO 0) := "0000000000000000";
     SIGNAL in_b : unsigned(15 DOWNTO 0) := "0000000000000000";
-    SIGNAL in_seletor : unsigned(2 DOWNTO 0) := "000";
+    SIGNAL in_seletor : unsigned(1 DOWNTO 0) := "00";
 
     SIGNAL out_result : unsigned(15 DOWNTO 0);
     SIGNAL flag_z : STD_LOGIC;
@@ -60,7 +60,7 @@ BEGIN
         -- TESTE 1: Soma Normal ("000")
         -- Esperado: out_result = 8, Z=0, C=0, V=0
         ------------------------------------------------------------------
-        in_seletor <= "000";
+        in_seletor <= "00";
         in_a <= x"0005"; -- 5 em Hexadecimal
         in_b <= x"0003"; -- 3 em Hexadecimal
         WAIT FOR 50 ns;
@@ -69,7 +69,7 @@ BEGIN
         -- TESTE 2: Testando o BHI (Subtração onde A > B)
         -- Esperado: out_result = 2, Z=0, C=1 (Sem empréstimo, logo BHI pularia)
         ------------------------------------------------------------------
-        in_seletor <= "001"; -- Operação de Subtração
+        in_seletor <= "01"; -- Operação de Subtração
         in_a <= x"0005";
         in_b <= x"0003";
         WAIT FOR 50 ns;
@@ -78,7 +78,7 @@ BEGIN
         -- TESTE 3: Testando a Flag Carry/Borrow (Subtração onde A < B)
         -- Esperado: Flag C = '0' (Houve empréstimo, BHI NÃO pularia)
         ------------------------------------------------------------------
-        in_seletor <= "001";
+        in_seletor <= "01";
         in_a <= x"0003";
         in_b <= x"0005";
         WAIT FOR 50 ns;
@@ -87,7 +87,7 @@ BEGIN
         -- TESTE 4: Testando a Flag Zero (Z)
         -- Esperado: Flag Z = '1' e Flag C = '1'
         ------------------------------------------------------------------
-        in_seletor <= "001";
+        in_seletor <= "01";
         in_a <= x"000A"; -- 10
         in_b <= x"000A"; -- 10
         WAIT FOR 50 ns;
@@ -97,7 +97,7 @@ BEGIN
         -- x"FF00" AND x"0FF0" = x"0F00"
         -- Esperado: out_result = x"0F00", Z=0, C=0, V=0
         ------------------------------------------------------------------
-        in_seletor <= "010"; -- AND
+        in_seletor <= "10"; -- AND
         in_a <= x"FF00";
         in_b <= x"0FF0";
         WAIT FOR 50 ns;
@@ -107,7 +107,7 @@ BEGIN
         -- x"FFFF" + x"0001" = x"10000", nao cabe em 16 bits
         -- Esperado: out_result = x"0000", Z=1, C=1, V=0
         ------------------------------------------------------------------
-        in_seletor <= "000"; -- Soma
+        in_seletor <= "00"; -- Soma
         in_a <= x"FFFF";
         in_b <= x"0001";
         WAIT FOR 50 ns;
@@ -118,7 +118,7 @@ BEGIN
         -- signed: -3 + -5 = -8, sem estouro => V=0
         -- Esperado: out_result = x"FFF8" (-8), Z=0, C=1, V=0
         ------------------------------------------------------------------
-        in_seletor <= "000"; -- Soma
+        in_seletor <= "00"; -- Soma
         in_a <= x"FFFD";
         in_b <= x"FFFB";
         WAIT FOR 50 ns;
@@ -129,7 +129,7 @@ BEGIN
         -- x7FFF é o maior número positivo de 16 bits (0111_1111_1111_1111).
         -- Esperado: out_result = x"8000", Z=0, C=0, V=1
         ------------------------------------------------------------------
-        in_seletor <= "000"; -- Soma
+        in_seletor <= "00"; -- Soma
         in_a <= x"7FFF";
         in_b <= x"0001";
         WAIT FOR 50 ns;
