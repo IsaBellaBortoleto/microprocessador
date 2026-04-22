@@ -138,6 +138,37 @@ BEGIN
         in_b <= x"0001";
         WAIT FOR 50 ns;
 
+        ------------------------------------------------------------------
+        -- TESTE 9: Testando o Shift Left ("11") com a Flag Carry
+        -- Deslocando 1 bit à esquerda.
+        -- in_a = x"8005" (1000 0000 0000 0101)
+        -- Esperado: out_result = x"000A", Z=0, C=1 (o bit 15 caiu no carry), V=0
+        ------------------------------------------------------------------
+        in_seletor <= "11"; -- Shift Left
+        in_a <= x"8005";
+        in_b <= x"0000"; -- B não importa para o shift, mas deixamos zerado por boa prática
+        WAIT FOR 50 ns;
+
+        ------------------------------------------------------------------
+        -- TESTE 10: Overflow na Subtração (Pos - Neg = Estouro)
+        -- x7FFF (32767) - xFFFF (-1) = 32768 (Não cabe no limite de +32767)
+        -- Esperado: out_result = x"8000" (-32768), Z=0, C=0, V=1
+        ------------------------------------------------------------------
+        in_seletor <= "01"; -- Subtração
+        in_a <= x"7FFF";
+        in_b <= x"FFFF";
+        WAIT FOR 50 ns;
+
+        ------------------------------------------------------------------
+        -- TESTE 11: Overflow Negativo na Soma (Neg + Neg = Pos)
+        -- x8000 (-32768) + xFFFF (-1) = -32769 (Não cabe!)
+        -- Esperado: out_result = x"7FFF" (+32767), Z=0, C=1, V=1
+        ------------------------------------------------------------------
+        in_seletor <= "00"; -- Soma
+        in_a <= x"8000";
+        in_b <= x"FFFF";
+        WAIT FOR 50 ns;
+
         -- Fim da simulação
         WAIT;
     END PROCESS;
