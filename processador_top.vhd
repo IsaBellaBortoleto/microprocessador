@@ -1,21 +1,35 @@
+--------------------------------------------------------------------------------
+-- Projeto: Microprocessador
+-- Descrição: Top Level - Banco de Registradores + Acumulador + ULA
+-- Autores: Isabela Bella Bortoleto e Nícolas Auersvalt Marques
+--------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 ENTITY processador_top IS
     PORT (
-        wr_en_banco : IN STD_LOGIC;
-        wr_en_acc : IN STD_LOGIC;
-        sel_imm : IN STD_LOGIC;
-        sel_ld : IN STD_LOGIC;
-        in_seletor : IN unsigned(1 DOWNTO 0);
+        -- Controle
         clk : IN STD_LOGIC;
         rst : IN STD_LOGIC;
+        wr_en_banco : IN STD_LOGIC;
+        wr_en_acc : IN STD_LOGIC;
+        sel_imm : IN STD_LOGIC;  -- MUX: seleciona constante (1) ou banco (0) pra entrada B da ULA
+        sel_ld : IN STD_LOGIC;   -- MUX: seleciona constante (1) ou acumulador (0) pra escrita no banco
+        in_seletor : IN unsigned(1 DOWNTO 0);
+ 
+        -- Dados
         cte_ext : IN unsigned(15 DOWNTO 0);
         write_sel : IN unsigned(3 DOWNTO 0);
         read_sel : IN unsigned(3 DOWNTO 0);
+ 
+        -- Flags
         flag_z : OUT STD_LOGIC;
         flag_c : OUT STD_LOGIC;
-        flag_v : OUT STD_LOGIC
+        flag_v : OUT STD_LOGIC;
+ 
+        -- Saídas observáveis (para verificação no testbench)
+        acc_out : OUT unsigned(15 DOWNTO 0);
+        banco_out : OUT unsigned(15 DOWNTO 0)
 
     );
 
@@ -69,13 +83,16 @@ ARCHITECTURE a_processador_top OF processador_top IS
 
 BEGIN
 
-    -- 3. Os seus MUXes (A lógica de roteamento)
+        -- 3. MUXes
+    -- MUX 1: entrada B da ULA = constante (ADDI) ou registrador do banco (ADD/SUB/CMPR)
     fio_in_b_ula <= cte_ext WHEN sel_imm = '1' ELSE
         fio_out_banco;
+
+    -- MUX 2: entrada do banco = constante (LD) ou acumulador (MOV Rn,A)
     fio_in_data_banco <= cte_ext WHEN sel_ld = '1' ELSE
         fio_out_acc;
 
-    -- 4. PORT MAP da ULA
+    -- 4. Instanciação da ULA
     inst_ula : ula PORT MAP(
         in_a => fio_out_acc, -- A entrada A da ULA é sempre o Acumulador
         in_b => fio_in_b_ula, -- A entrada B vem do seu MUX
@@ -86,7 +103,7 @@ BEGIN
         flag_v => flag_v
     );
 
-    -- 5. PORT MAP do Banco de Registradores
+    -- 5. Instanciação do Banco de Registradores
     inst_banco : banco_regs PORT MAP(
         data_in => fio_in_data_banco, -- Vem do seu segundo MUX
         data_out => fio_out_banco,
@@ -97,8 +114,8 @@ BEGIN
         read_sel => read_sel
     );
 
-    -- 6. PORT MAP do Acumulador (ACC)
-    inst_reg16bits : reg16bits PORT MAP(
+   -- 6. Instanciação do Acumulador(ACC)
+    inst_acc : reg16bits PORT MAP(
         clk => clk,
         rst => rst,
         wr_en => wr_en_acc,
@@ -106,4 +123,7 @@ BEGIN
         data_out => fio_out_acc
     );
 
+    -- 7. Saídas observáveis
+    acc_out <= fio_out_acc;
+    banco_out <= fio_out_banco;
 END ARCHITECTURE;

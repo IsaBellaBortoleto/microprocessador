@@ -5,8 +5,6 @@
 
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
--- numeric_std não é estritamente obrigatória no TB se não fizermos contas, 
--- mas é boa prática manter.
 USE IEEE.NUMERIC_STD.ALL;
 
 -- A entidade do testbench é sempre vazia
