@@ -16,7 +16,7 @@ ENTITY ula IS
         in_a : IN unsigned(15 DOWNTO 0);
         in_b : IN unsigned(15 DOWNTO 0);
 
-        -- Entradas para seleção da operação (Ex: 3 bits permitem até 8 operações)
+        -- Entradas para seleção da operação 
         in_seletor : IN unsigned(1 DOWNTO 0);
 
         -- Uma saída de resultado de 16 bits
@@ -51,7 +51,7 @@ BEGIN
     -- 1. Operacoes de soma, subtracao, AND e shift left
     res_soma <= ('0' & in_a) + ('0' & in_b);
     res_subt <= ('0' & in_a) + ('0' & not_b) + 1;
-    res_and <= in_a AND in_b;  
+    res_and <= in_a AND in_b;
     res_shiftleft <= in_a(14 DOWNTO 0) & '0';
     -- 4 operacao
 
@@ -60,8 +60,7 @@ BEGIN
         res_soma(15 DOWNTO 0) WHEN in_seletor = "00" ELSE
         res_subt(15 DOWNTO 0) WHEN in_seletor = "01" ELSE
         res_and WHEN in_seletor = "10" ELSE
-        res_shiftleft         WHEN in_seletor = "11" ELSE
-        --(in_a xor in_b)        when in_seletor = "011" else
+        res_shiftleft WHEN in_seletor = "11" ELSE
         "0000000000000000"; -- Valor padrão se der pau
 
     -- 3. Joga o resultado escolhido no pino de saída
@@ -75,22 +74,19 @@ BEGIN
     --Flag carry
     flag_c <= res_soma(16) WHEN in_seletor = "00" ELSE
         res_subt(16) WHEN in_seletor = "01" ELSE
-        in_a(15)     WHEN in_seletor = "11" ELSE
+        in_a(15) WHEN in_seletor = "11" ELSE
         '0'; -- Para outras operações, o Carry não é relevante
-
-
+        
     --Flag de overflow (BVS) -> Falta de espaço (-32.768 até +32.767)
     -- vai ocorrer quando somar dois valores que passe de 32.767 ou -32.768
     -- Soma de dois positivos que deu negativo
 
-    flag_v <= 
+    flag_v <=
         -- Soma
-        ((NOT in_a(15) AND NOT in_b(15) AND resultado_final(15)) OR 
-         (in_a(15) AND in_b(15) AND NOT resultado_final(15))) WHEN in_seletor = "00" ELSE 
+        ((NOT in_a(15) AND NOT in_b(15) AND resultado_final(15)) OR
+        (in_a(15) AND in_b(15) AND NOT resultado_final(15))) WHEN in_seletor = "00" ELSE
         -- Subtração
-        ((NOT in_a(15) AND in_b(15) AND resultado_final(15)) OR 
-         (in_a(15) AND NOT in_b(15) AND NOT resultado_final(15))) WHEN in_seletor = "01" ELSE 
+        ((NOT in_a(15) AND in_b(15) AND resultado_final(15)) OR
+        (in_a(15) AND NOT in_b(15) AND NOT resultado_final(15))) WHEN in_seletor = "01" ELSE
         '0';
-    
-
 END ARCHITECTURE;
