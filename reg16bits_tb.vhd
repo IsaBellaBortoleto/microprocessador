@@ -81,7 +81,7 @@ BEGIN
         data_in <= "1111111111111111";
         WAIT FOR 100 ns;
 
-        WAIT; -- Obrigatório terminar com wait
+        WAIT;
 
     END PROCESS;
 END ARCHITECTURE;
