@@ -1,22 +1,25 @@
 v 4
-file . "banco_regs.vhd" "0aab544b9a8d512edf385dafb516f41fa2694dee" "20260427194439.817":
-  entity banco_regs at 1( 0) + 0 on 69;
-  architecture a_banco_regs of banco_regs at 19( 614) + 0 on 70;
-file . "reg16bits.vhd" "7c2b66d0ea3dfe943073f1782f26b724eebb2c94" "20260427194431.883":
-  entity reg16bits at 6( 313) + 0 on 67;
-  architecture a_reg16bits of reg16bits at 19( 621) + 0 on 68;
-file . "ula.vhd" "c6213713dd6424f32b3ad902309c6aecff980ce3" "20260427194443.906":
-  entity ula at 9( 324) + 0 on 71;
-  architecture a_ula of ula at 37( 1113) + 0 on 72;
-file . "ula_tb.vhd" "371e5186b32c13bf7f036a389ab202a73f17fe90" "20260422201914.103":
-  entity ula_tb at 6( 277) + 0 on 45;
-  architecture a_ula_tb of ula_tb at 16( 542) + 0 on 46;
-file . "reg16bits_tb.vhd" "d6e6ee4186701dc0900f59554b0922ce15060128" "20260427173134.997":
-  entity reg16bits_tb at 1( 0) + 0 on 49;
-  architecture a_reg16bits_tb of reg16bits_tb at 8( 106) + 0 on 50;
-file . "processador_top.vhd" "5b1fe3976c715e7e19708965453011d6757a9362" "20260427194702.604":
-  entity processador_top at 6( 331) + 0 on 77;
-  architecture a_processador_top of processador_top at 38( 1305) + 0 on 78;
+file . "banco_regs_tb.vhd" "dae6ae9571cef52d15eba2bc409ee0a86f58bf84" "20260430014241.754":
+  entity banco_regs_tb at 1( 0) + 0 on 97;
+  architecture a_banco_regs_tb of banco_regs_tb at 9( 142) + 0 on 98;
 file . "processador_top_tb.vhd" "354e228a1a90f5a8b57ebd9f9fe0bc584131574b" "20260427194705.819":
   entity processador_top_tb at 6( 289) + 0 on 79;
   architecture a_processador_top_tb of processador_top_tb at 12( 406) + 0 on 80;
+file . "processador_top.vhd" "5b1fe3976c715e7e19708965453011d6757a9362" "20260427194702.604":
+  entity processador_top at 6( 331) + 0 on 77;
+  architecture a_processador_top of processador_top at 38( 1305) + 0 on 78;
+file . "reg16bits_tb.vhd" "d6e6ee4186701dc0900f59554b0922ce15060128" "20260427173134.997":
+  entity reg16bits_tb at 1( 0) + 0 on 49;
+  architecture a_reg16bits_tb of reg16bits_tb at 8( 106) + 0 on 50;
+file . "ula_tb.vhd" "371e5186b32c13bf7f036a389ab202a73f17fe90" "20260422201914.103":
+  entity ula_tb at 6( 277) + 0 on 45;
+  architecture a_ula_tb of ula_tb at 16( 542) + 0 on 46;
+file . "ula.vhd" "c6213713dd6424f32b3ad902309c6aecff980ce3" "20260427194443.906":
+  entity ula at 9( 324) + 0 on 71;
+  architecture a_ula of ula at 37( 1113) + 0 on 72;
+file . "reg16bits.vhd" "ec97d45211bacff0531ff8fbf060aa45b48c2c0f" "20260430014234.629":
+  entity reg16bits at 6( 308) + 0 on 93;
+  architecture a_reg16bits of reg16bits at 19( 603) + 0 on 94;
+file . "banco_regs.vhd" "c15a6f0fde09dec4c3b78c7299310191c8cdae51" "20260430014237.853":
+  entity banco_regs at 1( 0) + 0 on 95;
+  architecture a_banco_regs of banco_regs at 20( 676) + 0 on 96;
