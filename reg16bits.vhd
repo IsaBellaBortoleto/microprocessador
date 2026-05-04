@@ -2,7 +2,7 @@
 -- Projeto: Microprocessador
 -- Descrição: registrador de 16 bits
 -- Autores: Isabela Bella Bortoleto e Nícolas Auersvalt Marques
---------------------------------------------------------------------------------LIBRARY ieee;
+--------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;

@@ -73,13 +73,13 @@ ARCHITECTURE a_processador_top OF processador_top IS
     SIGNAL fio_in_data_banco : unsigned(15 DOWNTO 0);
 
     SIGNAL is_add : std_logic;
-    SIGNAL is_sub : std_logic;
+    --SIGNAL is_sub : std_logic;
 
 BEGIN
     -- aqui é pra evitar o ADDI permitido
     is_add <= '1' when in_seletor = "00" else '0';
     -- SUBI bloqueado
-    is_sub <= '1' when in_seletor = "01" else '0';
+    --is_sub <= '1' when in_seletor = "01" else '0';
 
     fio_in_b_ula <= 
         cte_ext WHEN (sel_imm = '1' AND is_add = '1') ELSE
@@ -111,7 +111,7 @@ BEGIN
     inst_acc : reg16bits PORT MAP(
         clk => clk,
         rst => rst,
-        wr_en => (wr_en_acc AND (is_add OR is_sub)),
+        wr_en => wr_en_acc,
         data_in => fio_out_ula,
         data_out => fio_out_acc
     );
