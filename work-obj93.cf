@@ -1,4 +1,7 @@
 v 4
+file . "incr_pc.vhd" "78af1207d638c77b2f4caf0edaefb54b72e15e5d" "20260505124804.772":
+  entity incr_pc at 6( 337) + 0 on 133;
+  architecture a_incr_pc of incr_pc at 19( 561) + 0 on 134;
 file . "rom_tb.vhd" "f993b82680f12ee233235dd97242ebe39e544dc9" "20260504191947.553":
   entity rom_tb at 1( 0) + 0 on 123;
   architecture a_rom_tb of rom_tb at 8( 100) + 0 on 124;
@@ -29,3 +32,9 @@ file . "banco_regs_tb.vhd" "33ca90f46014554b91fa258fc8ea30350a3f5f66" "202604300
 file . "rom.vhd" "e47dfc4c0931619d4d3c994689af265485177c58" "20260504191804.510":
   entity rom at 6( 342) + 0 on 121;
   architecture a_rom of rom at 16( 578) + 0 on 122;
+file . "pc.vhd" "43c702982ddd55c9bdb30483a6d3efd391c1e0ea" "20260505124759.519":
+  entity pc at 6( 338) + 0 on 131;
+  architecture a_pc of pc at 19( 637) + 0 on 132;
+file . "incr_pc_tb.vhd" "340a06edfc7397a23a4b457bae0d3a1dd21ea541" "20260505124809.697":
+  entity incr_pc_tb at 1( 0) + 0 on 135;
+  architecture a_incr_pc_tb of incr_pc_tb at 8( 104) + 0 on 136;
