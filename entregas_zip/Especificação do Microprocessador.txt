@@ -1,0 +1,22 @@
+Seguem as características sorteadas para a UNIDADE DE CONTROLE do processador da sua equipe.
+{'Largura da ROM / tamanho da instrução em bits': [16],
+ 'Incremento do PC': ['PC sensível a clock de descida'],
+ 'Saltos': 'Incondicional é relativo e condicional é absoluto',
+ 'Leitura da ROM': ['síncrona'],
+ 'Registrador de Instruções': ['wr_en no primeiro estado']}
+
+Seguem as características sorteadas para o BANCO DE REGISTRADORES (e conexão com a ULA) do processador da sua equipe.
+
+{'Número de registradores no banco': [10],
+ 'Acumulador ou não': 'ULA com acumulador'}
+
+{'ADD ctes': 'Há instrução ADDI que soma com constante',
+ 'Subtração': 'Subtração com SUB sem usar borrow',
+ 'SUB ops': 'Subtração com dois operandos apenas',
+ 'ADD ops': 'ADD com dois operandos apenas',
+ 'Carga de constantes': 'Carrega diretamente com LD sem somar',
+ 'SUB ctes': 'Subtração apenas entre registradores, nunca com constantes',
+ 'Comparações': 'Comparação apenas com regs - CMPR'}
+Seguem as características sorteadas para a UNIDADE LÓGICO-ARITMÉTICA do processador da sua equipe. Elas incluem os seguintes saltos condicionais (que exigem certas flags da ULA).
+
+{'Saltos condicionais': ['BHI', 'BVS']}

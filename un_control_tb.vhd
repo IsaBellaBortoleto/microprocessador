@@ -17,14 +17,15 @@ ARCHITECTURE a_un_control_tb OF un_control_tb IS
             rst : IN STD_LOGIC;
             pc_out : OUT unsigned(6 DOWNTO 0);
             rom_out : OUT unsigned(15 DOWNTO 0);
-            estado_out : OUT STD_LOGIC
+            estado_out : OUT STD_LOGIC;
+            ir_out : OUT unsigned(15 DOWNTO 0)
         );
     END COMPONENT;
     -- Sinais para ligação 
 
-    SIGNAL clk, rst,estado_out : STD_LOGIC;
+    SIGNAL clk, rst,estado_out: STD_LOGIC;
     SIGNAL pc_out : unsigned(6 DOWNTO 0);
-    SIGNAL rom_out : unsigned(15 DOWNTO 0);
+    SIGNAL rom_out,ir_out  : unsigned(15 DOWNTO 0);
 
     CONSTANT period_time : TIME := 100 ns;
     SIGNAL finished : STD_LOGIC := '0';
@@ -36,7 +37,8 @@ BEGIN
         rst => rst,
         pc_out => pc_out,
         rom_out => rom_out,
-        estado_out => estado_out
+        estado_out => estado_out,
+        ir_out => ir_out
     );
     reset_global : PROCESS
     BEGIN
