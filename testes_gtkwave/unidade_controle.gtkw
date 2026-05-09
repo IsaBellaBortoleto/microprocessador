@@ -1,0 +1,30 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Sat May  9 19:45:52 2026
+[*]
+[dumpfile] "/home/isabela/Documentos/github/microprocessador/un_control_tb.ghw"
+[dumpfile_mtime] "Sat May  9 19:42:56 2026"
+[dumpfile_size] 6318
+[savefile] "/home/isabela/Documentos/github/microprocessador/testes_gtkwave/unidade_controle.gtkw"
+[timestart] 0
+[size] 1000 600
+[pos] -1 -1
+*-31.697584 2900000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.un_control_tb.
+[sst_width] 233
+[signals_width] 177
+[sst_expanded] 1
+[sst_vpaned_height] 144
+@22
+#{top.un_control_tb.pc_out[6:0]} top.un_control_tb.pc_out[6] top.un_control_tb.pc_out[5] top.un_control_tb.pc_out[4] top.un_control_tb.pc_out[3] top.un_control_tb.pc_out[2] top.un_control_tb.pc_out[1] top.un_control_tb.pc_out[0]
+#{top.un_control_tb.rom_out[15:0]} top.un_control_tb.rom_out[15] top.un_control_tb.rom_out[14] top.un_control_tb.rom_out[13] top.un_control_tb.rom_out[12] top.un_control_tb.rom_out[11] top.un_control_tb.rom_out[10] top.un_control_tb.rom_out[9] top.un_control_tb.rom_out[8] top.un_control_tb.rom_out[7] top.un_control_tb.rom_out[6] top.un_control_tb.rom_out[5] top.un_control_tb.rom_out[4] top.un_control_tb.rom_out[3] top.un_control_tb.rom_out[2] top.un_control_tb.rom_out[1] top.un_control_tb.rom_out[0]
+@29
+top.un_control_tb.uut.pc_wr_en
+top.un_control_tb.uut.jump_en
+top.un_control_tb.uut.estado_s
+top.un_control_tb.uut.estado_out
+top.un_control_tb.uut.rst
+top.un_control_tb.uut.clk
+[pattern_trace] 1
+[pattern_trace] 0

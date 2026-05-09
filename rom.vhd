@@ -16,19 +16,18 @@ END ENTITY;
 ARCHITECTURE a_rom OF rom IS
     TYPE mem IS ARRAY (0 TO 127) OF unsigned(15 DOWNTO 0);
     CONSTANT conteudo_rom : mem := (
-        -- caso endereco => conteudo
-        0 => "0000000000000010",
-        1 => "0000100000000000",
-        2 => "0000000000000000",
-        3 => "0000000000000000",
-        4 => "0000100000000000",
-        5 => "0000000000000010",
-        6 => "0000111100000011",
-        7 => "0000000000000010",
-        8 => "0000000000000010",
-        9 => "0000000000000000",
-        10 => "0000000000000000",
-        -- abaixo: casos omissos => (zero em todos os bits)
+        -- Programa de teste: NOP e Jump Relativo
+        -- Opcode: 0000 = NOP, 1111 = JR (delta nos bits 6 downto 0)
+        -- verificar os números em complemento de 2 para saltos positivos e negativos
+
+        0 => "0000000000000000", -- NOP
+        1 => "0000000000000000", -- NOP
+        2 => "1111000000000011", -- JR +3 (pula pra endereço 5)
+        3 => "0000000000000000", -- NOP (nunca executa)
+        4 => "0000000000000000", -- NOP (nunca executa)
+        5 => "0000000000000000", -- NOP
+        6 => "1111000001111100", -- JR -4 (volta pra endereço 2, loop!)
+
         OTHERS => (OTHERS => '0')
     );
 BEGIN
